@@ -60,6 +60,7 @@
               glib
               glibc
               pixman
+              genimage
             ];
         };
       });

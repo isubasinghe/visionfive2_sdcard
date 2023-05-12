@@ -15,7 +15,7 @@ UBOOT=$(pwd)/u-boot
 UBOOT_FDT=$UBOOT/arch/riscv/dts/starfive_visionfive2.dtb
 UBOOT_BIN=$UBOOT/u-boot.bin
 UBOOT_SPL_BIN=$UBOOT/spl/u-boot-spl.bin
-UBOOT_ITS=$(pwd)/star64-uboot-fit-image.its
+UBOOT_ITS=$(pwd)/visionfive2-uboot-fit-image.its
 
 SPL_TOOL_SRC=$(pwd)/soft_3rdpart/spl_tool
 
@@ -54,13 +54,13 @@ make --trace --no-silent -C $OPENSBI PLATFORM=generic \
                     O=$OPENSBI_BUILD_DIR \
                     FW_TEXT_START=0x40000000 \
 # # mkimage U-Boot
-# mkimage -f $UBOOT_ITS -A riscv -O u-boot -T firmware $OPENSBI_PAYLOAD_FINAL
+mkimage -f $UBOOT_ITS -A riscv -O u-boot -T firmware $OPENSBI_PAYLOAD_FINAL
 # # Compile spl_tool
-# make -C $SPL_TOOL_SRC
+make -C $SPL_TOOL_SRC
 # # Add SPL header to U-Boot SPL
-# $SPL_TOOL_SRC/spl_tool -c -f $UBOOT_SPL_BIN 
+$SPL_TOOL_SRC/spl_tool -c -f $UBOOT_SPL_BIN 
 # # Finally compile all of it into one image
-# mkdir -p temp
-# mkdir -p root
-# genimage --config $GENIMAGE_CFG --inputpath . --tmppath temp
+mkdir -p temp
+mkdir -p root
+genimage --config $GENIMAGE_CFG --inputpath . --tmppath temp
 
