@@ -1,5 +1,3 @@
-# Note: not completed need to look into where UBOOT_ITS comes from in the `build_image.sh` file. 
-
 # VisionFive2 microSD card setup
 
 This repository holds a very niche purpose. It contains a script (`build_image.sh`)
